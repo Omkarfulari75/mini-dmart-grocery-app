@@ -1,72 +1,43 @@
-# SECURITY.md - Security Policy & Vulnerability Mitigation
+# 🛡️ SECURITY.md — Mini D-Mart Security & Audit Policy
 
-## Security Overview
-
-The **Mini D-Mart Grocery Store Application** implements enterprise-grade security controls designed to protect user identity, ensure role integrity, prevent unauthorized data access, and track critical store operations through an immutable audit trail system.
+## Security Architecture Overview
+Mini D-Mart implements multi-layered security practices following OWASP standards for full-stack web application defense.
 
 ---
 
 ## 1. Authentication & Session Security
-
-- **Password Hashing**: User passwords are encrypted using `bcryptjs` with salted rounds (`saltFactor = 10`) prior to storage. Plaintext passwords are never logged or stored.
-- **JSON Web Tokens (JWT)**: Authentication utilizes stateless signed JWT tokens containing strictly non-sensitive user metadata (`id`, `email`, `role`). Tokens expire in 7 days.
-- **Header-Based Authorization**: Client requests pass tokens in standard HTTP `Authorization: Bearer <TOKEN>` headers.
-
----
-
-## 2. Role-Based Access Control (RBAC) Architecture
-
-Access to system endpoints is strictly guarded by server-side middleware (`requireRole`).
-
-### Permission Matrix
-
-| Resource / Action | Customer | Store Staff / Manager | Admin |
-| :--- | :---: | :---: | :---: |
-| Browse Products & Categories | ✅ | ✅ | ✅ |
-| Checkout & Place Order | ✅ | ✅ | ✅ |
-| View Own Order Lifecycle | ✅ | ✅ | ✅ |
-| Submit Return / Exchange | ✅ | ✅ | ✅ |
-| View All Store Orders Queue | ❌ | ✅ | ✅ |
-| Update Order Fulfillment Status | ❌ | ✅ | ✅ |
-| Approve / Reject Return Requests | ❌ | ✅ | ✅ |
-| Update Inventory Stock Levels | ❌ | ✅ | ✅ |
-| Manage User Roles (RBAC) | ❌ | ❌ | ✅ |
-| Product Master CRUD (Add/Delete) | ❌ | ❌ | ✅ |
-| View System Security Audit Logs | ❌ | ❌ | ✅ |
-
-> **Security Guard**: Attempting to bypass client UI controls to invoke restricted API endpoints returns `403 Forbidden` and immediately records an entry in the system `audit_logs` table.
+- **JSON Web Tokens (JWT)**: Signed with high-entropy secrets (`JWT_SECRET`) with configurable expiration.
+- **Password Hashing**: Passwords stored using `bcryptjs` with salt rounds (`10`). Raw passwords are never logged or stored in plain text.
+- **Role-Based Access Control (RBAC)**: Strict role scoping (`CUSTOMER`, `STAFF`, `ADMIN`) enforced at both frontend router guards and backend middleware (`verifyToken`, `authorizeRoles`).
 
 ---
 
-## 3. Real-Time Audit Logging System
-
-All sensitive and high-value system events generate an audit log record containing:
-- Timestamp (UTC)
-- User ID & Full Name
-- User Role (`CUSTOMER`, `STAFF`, `ADMIN`, or `SYSTEM`)
-- Action Event Code (`USER_LOGIN_SUCCESS`, `ORDER_CREATED`, `ORDER_STATUS_UPDATED`, `RETURN_PROCESSED`, `UNAUTHORIZED_ACCESS_ATTEMPT`, `USER_ROLE_CHANGED`)
-- Event Details & IP Address
-
-Audit logs can be searched and inspected in real time by System Admins via the **Admin & Security Audit Dashboard**.
+## 2. Input Validation & Data Sanitization
+- **Zod Validation Schemas**: Rigid request payload schemas prevent SQL/NoSQL injection, prototype pollution, and malformed parameter attacks.
+- **Param Sanitization**: Integer conversion and string trimming on all numerical inputs (e.g., prices, stock quantities, product IDs).
 
 ---
 
-## 4. Rate Limiting & Input Validation
+## 3. Real-Time System Security Audit Logging
+All security-sensitive operations generate timestamped audit entries recorded in the immutable Audit Log system:
+- `USER_LOGIN_SUCCESS` / `USER_LOGIN_FAILED`
+- `USER_REGISTERED`
+- `USER_ROLE_PROMOTED` / `USER_ROLE_DEMOTED`
+- `ORDER_CREATED` / `ORDER_CANCELLED`
+- `RETURN_REQUESTED` / `RETURN_PROCESSED`
 
-- **Rate Limiting**: Express routes for authentication (`/api/auth/login` and `/api/auth/register`) are throttled using `express-rate-limit` (100 requests per 15-minute window per IP) to mitigate brute force attacks.
-- **Input Sanitization & Schema Validation**: All request bodies are strictly sanitized and parsed using `Zod` schemas before execution, preventing SQL/JSON injection, parameter pollution, and schema drift.
-- **CORS Policies**: Explicit Cross-Origin Resource Sharing (CORS) rules configured on the Express backend server.
+Audit entries capture: `Timestamp`, `User ID`, `User Name`, `Role`, `Action Type`, `Detailed Description`, and `IP Address`.
 
 ---
 
-## 5. Test Credentials
+## 4. API & Network Protection
+- **CORS Policy**: Configured cross-origin access controls.
+- **Rate Limiting**: Protects authentication and order creation endpoints against brute-force and DDoS attacks.
+- **Error Shielding**: Server error responses sanitize internal stack traces in production to prevent information disclosure.
 
-For evaluation purposes, pre-configured accounts are provided:
+---
 
-| Role | Email | Password |
-| :--- | :--- | :--- |
-| **Customer** | `customer@dmart.com` | `Password123!` |
-| **Store Staff / Manager** | `staff@dmart.com` | `Password123!` |
-| **Admin** | `admin@dmart.com` | `Password123!` |
-
-*(Note: The top navigation bar also features a 1-click **Role Switcher Demo** button for instant evaluator role testing).*
+## 5. Vulnerability Disclosure
+If you discover a security vulnerability within Mini D-Mart, please report it directly to the repository maintainer:
+- **Email**: `omkar@dmart.com` / `admin@dmart.com`
+- **GitHub**: [https://github.com/Omkarfulari75/mini-dmart-grocery-app](https://github.com/Omkarfulari75/mini-dmart-grocery-app)
