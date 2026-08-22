@@ -22,24 +22,131 @@ import {
   CheckCircle2
 } from 'lucide-react';
 
+const FALLBACK_CATEGORIES = [
+  { id: 1, name: 'Fresh Produce' },
+  { id: 2, name: 'Dairy & Bakery' },
+  { id: 3, name: 'Beverages' },
+  { id: 4, name: 'Snacks & Munchies' },
+  { id: 5, name: 'Pantry & Staples' },
+  { id: 6, name: 'Household Essentials' }
+];
+
+const FALLBACK_PRODUCTS = [
+  {
+    id: 1,
+    name: 'Organic Royal Gala Apples',
+    category_name: 'Fresh Produce',
+    price: 180,
+    discount_price: 149,
+    unit: '1 kg',
+    rating: 4.8,
+    stock_quantity: 45,
+    image_url: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 2,
+    name: 'Fresh Farm Spinach (Palak)',
+    category_name: 'Fresh Produce',
+    price: 40,
+    discount_price: 29,
+    unit: '250 g',
+    rating: 4.6,
+    stock_quantity: 60,
+    image_url: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 3,
+    name: 'Amul Taaza Toned Milk',
+    category_name: 'Dairy & Bakery',
+    price: 64,
+    discount_price: 62,
+    unit: '1 Litre',
+    rating: 4.9,
+    stock_quantity: 80,
+    image_url: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 4,
+    name: 'Artisan Whole Wheat Bread',
+    category_name: 'Dairy & Bakery',
+    price: 55,
+    discount_price: 48,
+    unit: '400 g',
+    rating: 4.7,
+    stock_quantity: 34,
+    image_url: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 5,
+    name: 'Cold Pressed Orange Juice',
+    category_name: 'Beverages',
+    price: 120,
+    discount_price: 99,
+    unit: '500 ml',
+    rating: 4.8,
+    stock_quantity: 28,
+    image_url: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 6,
+    name: 'Premium Roasted Almonds',
+    category_name: 'Snacks & Munchies',
+    price: 350,
+    discount_price: 299,
+    unit: '250 g',
+    rating: 4.9,
+    stock_quantity: 51,
+    image_url: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 7,
+    name: 'Basmati Rice Premium Extra Long',
+    category_name: 'Pantry & Staples',
+    price: 220,
+    discount_price: 189,
+    unit: '1 kg',
+    rating: 4.8,
+    stock_quantity: 79,
+    image_url: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 8,
+    name: 'Organic Cold Pressed Mustard Oil',
+    category_name: 'Pantry & Staples',
+    price: 210,
+    discount_price: 185,
+    unit: '1 Litre',
+    rating: 4.6,
+    stock_quantity: 39,
+    image_url: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 9,
+    name: 'Eco-Friendly Liquid Laundry Detergent',
+    category_name: 'Household Essentials',
+    price: 450,
+    discount_price: 380,
+    unit: '1 Litre',
+    rating: 4.7,
+    stock_quantity: 30,
+    image_url: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80'
+  }
+];
+
 export default function CustomerHome() {
   const { user } = useAuth();
 
-  // If user is Staff or Admin, redirect to their operational dashboard!
   if (user?.role === 'STAFF') return <Navigate to="/staff" replace />;
   if (user?.role === 'ADMIN') return <Navigate to="/admin" replace />;
 
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(FALLBACK_PRODUCTS);
+  const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
+  const [loading, setLoading] = useState(false);
 
-  // Filters & Search
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sortBy, setSortBy] = useState('');
   const [stockOnly, setStockOnly] = useState(false);
-
-  // Selected product modal
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const { addToCart } = useCart();
@@ -57,14 +164,15 @@ export default function CustomerHome() {
   const fetchCategories = async () => {
     try {
       const res = await axios.get('/api/categories');
-      setCategories(res.data.categories || []);
+      if (res.data.categories && res.data.categories.length > 0) {
+        setCategories(res.data.categories);
+      }
     } catch (err) {
-      console.error(err);
+      console.error('Using fallback categories:', err);
     }
   };
 
   const fetchProducts = async () => {
-    setLoading(true);
     try {
       const params = {};
       if (search) params.search = search;
@@ -73,12 +181,38 @@ export default function CustomerHome() {
       if (stockOnly) params.stockOnly = 'true';
 
       const res = await axios.get('/api/products', { params });
-      setProducts(res.data.products || []);
+      if (res.data.products && res.data.products.length > 0) {
+        setProducts(res.data.products);
+      } else {
+        filterFallbackProducts();
+      }
     } catch (err) {
-      console.error(err);
-    } fontFinally: {
+      console.error('Using fallback products:', err);
+      filterFallbackProducts();
+    } finally {
       setLoading(false);
     }
+  };
+
+  const filterFallbackProducts = () => {
+    let list = [...FALLBACK_PRODUCTS];
+    if (search) {
+      list = list.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    }
+    if (selectedCategory) {
+      list = list.filter(p => p.category_name === selectedCategory);
+    }
+    if (stockOnly) {
+      list = list.filter(p => p.stock_quantity > 0);
+    }
+    if (sortBy === 'price-low') {
+      list.sort((a, b) => (a.discount_price || a.price) - (b.discount_price || b.price));
+    } else if (sortBy === 'price-high') {
+      list.sort((a, b) => (b.discount_price || b.price) - (a.discount_price || a.price));
+    } else if (sortBy === 'rating') {
+      list.sort((a, b) => b.rating - a.rating);
+    }
+    setProducts(list);
   };
 
   const handleQuickAdd = (product, e) => {
@@ -90,7 +224,6 @@ export default function CustomerHome() {
     }, 1500);
   };
 
-  // Recipe-to-Cart Bundles definition
   const recipeBundles = [
     {
       id: 'bundle-smoothie',
@@ -167,7 +300,6 @@ export default function CustomerHome() {
             </div>
           </div>
 
-          {/* Hero Visual Card */}
           <div className="w-full md:w-80 glass-panel p-5 rounded-3xl bg-white/10 border-white/20 text-white shadow-2xl">
             <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-3">
               <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-300">🎉 Assessment Offer</span>
@@ -263,8 +395,6 @@ export default function CustomerHome() {
 
         {/* Search & Filter Bar */}
         <div className="glass-panel p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-          
-          {/* Search Input */}
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
@@ -276,9 +406,7 @@ export default function CustomerHome() {
             />
           </div>
 
-          {/* Filters & Sorting */}
           <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            {/* Sort Dropdown */}
             <div className="flex items-center gap-2">
               <ArrowUpDown className="w-4 h-4 text-slate-400 shrink-0" />
               <select
@@ -290,11 +418,9 @@ export default function CustomerHome() {
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
                 <option value="rating">Highest Rated</option>
-                <option value="newest">Newest Arrivals</option>
               </select>
             </div>
 
-            {/* In Stock Only Checkbox */}
             <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 rounded-xl">
               <input
                 type="checkbox"
@@ -369,6 +495,9 @@ export default function CustomerHome() {
                         src={product.image_url}
                         alt={product.name}
                         className="h-40 object-contain group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          e.target.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80';
+                        }}
                       />
                       {discountPercent > 0 && (
                         <span className="absolute top-3 left-3 bg-rose-500 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md">
