@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://mini-dmart-api.onrender.com/api/:path*"
+      "destination": "https://mini-dmart-grocery-app.onrender.com/api/:path*"
     },
     {
       "source": "/(.*)",
