@@ -1,0 +1,1074 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Rahul Customer",
+      "email": "customer@dmart.com",
+      "password": "$2a$10$PcWFXjj0lBH9OYJfkGcssOZpWX.m3CKPBDczhOs95kn6Yur7apuTW",
+      "role": "CUSTOMER",
+      "phone": "+91 9876543210",
+      "created_at": "2026-08-01T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Priya Store Staff",
+      "email": "staff@dmart.com",
+      "password": "$2a$10$PcWFXjj0lBH9OYJfkGcssOZpWX.m3CKPBDczhOs95kn6Yur7apuTW",
+      "role": "STAFF",
+      "phone": "+91 9876543211",
+      "created_at": "2026-08-01T10:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Vikram Admin",
+      "email": "admin@dmart.com",
+      "password": "$2a$10$PcWFXjj0lBH9OYJfkGcssOZpWX.m3CKPBDczhOs95kn6Yur7apuTW",
+      "role": "ADMIN",
+      "phone": "+91 9876543212",
+      "created_at": "2026-08-01T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "omkar",
+      "email": "om@gmail.com",
+      "password": "$2a$10$X7y6NNTm1ZlInjfR/TuivOE9CsVjvnnQdSeuZAm9NINm0sgnxjuF6",
+      "role": "CUSTOMER",
+      "phone": "",
+      "created_at": "2026-08-22T16:25:20.321Z"
+    },
+    {
+      "id": 5,
+      "name": "sai",
+      "email": "sai@gmail.com",
+      "password": "$2a$10$2NrIzHeSOhQkGg.mOFDoxe5SixF0kpPYvhyfBy5UN1t/j5Dan/9v6",
+      "role": "CUSTOMER",
+      "phone": "",
+      "created_at": "2026-08-22T17:50:29.943Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Fresh Produce",
+      "slug": "fresh-produce",
+      "icon": "Apple",
+      "description": "Fresh farm fruits & crisp vegetables"
+    },
+    {
+      "id": 2,
+      "name": "Dairy & Bakery",
+      "slug": "dairy-bakery",
+      "icon": "Milk",
+      "description": "Milk, cheese, butter, fresh bread & eggs"
+    },
+    {
+      "id": 3,
+      "name": "Beverages",
+      "slug": "beverages",
+      "icon": "Coffee",
+      "description": "Juices, soft drinks, tea, coffee & water"
+    },
+    {
+      "id": 4,
+      "name": "Snacks & Munchies",
+      "slug": "snacks",
+      "icon": "Cookie",
+      "description": "Chips, biscuits, nuts & packaged snacks"
+    },
+    {
+      "id": 5,
+      "name": "Pantry & Staples",
+      "slug": "pantry",
+      "icon": "ShoppingBag",
+      "description": "Rice, wheat flour, pulses, spices & oils"
+    },
+    {
+      "id": 6,
+      "name": "Household Essentials",
+      "slug": "household",
+      "icon": "Home",
+      "description": "Cleaning supplies, detergents & home care"
+    }
+  ],
+  "products": [
+    {
+      "id": 9,
+      "name": "Eco-Friendly Liquid Laundry Detergent",
+      "description": "Tough on tough stains, gentle on clothes and environment. Plant-based non-toxic formula.",
+      "price": 450,
+      "discount_price": 380,
+      "category_id": 6,
+      "category_name": "Household Essentials",
+      "stock_quantity": 30,
+      "unit": "1 Litre",
+      "image_url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80",
+      "rating": 4.7,
+      "review_count": 29,
+      "is_pickup_eligible": 1,
+      "return_window_days": 7,
+      "created_at": "2026-08-02T10:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Basmati Rice Premium Extra Long",
+      "description": "Aromatic long grain basmati rice, naturally aged for 2 years. Fluffy non-sticky grains.",
+      "price": 220,
+      "discount_price": 189,
+      "category_id": 5,
+      "category_name": "Pantry & Staples",
+      "stock_quantity": 79,
+      "unit": "1 kg",
+      "image_url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
+      "rating": 4.8,
+      "review_count": 94,
+      "is_pickup_eligible": 1,
+      "return_window_days": 7,
+      "created_at": "2026-08-02T10:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Organic Cold Pressed Mustard Oil",
+      "description": "Traditional kachi ghani mustard oil. Pungent aroma and authentic traditional taste for gourmet cooking.",
+      "price": 210,
+      "discount_price": 185,
+      "category_id": 5,
+      "category_name": "Pantry & Staples",
+      "stock_quantity": 38,
+      "unit": "1 Litre",
+      "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80",
+      "rating": 4.6,
+      "review_count": 38,
+      "is_pickup_eligible": 1,
+      "return_window_days": 7,
+      "created_at": "2026-08-02T10:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Cold Pressed Orange Juice",
+      "description": "100% pure squeezed Valencia orange juice with natural pulp. Rich Vitamin C refresh.",
+      "price": 120,
+      "discount_price": 99,
+      "category_id": 3,
+      "category_name": "Beverages",
+      "stock_quantity": 28,
+      "unit": "500 ml",
+      "image_url": "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80",
+      "rating": 4.8,
+      "review_count": 53,
+      "is_pickup_eligible": 1,
+      "return_window_days": 5,
+      "created_at": "2026-08-02T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Artisan Whole Wheat Bread",
+      "description": "Freshly baked 100% whole grain bread with multi-seeds. High fiber and no added preservatives.",
+      "price": 55,
+      "discount_price": 48,
+      "category_id": 2,
+      "category_name": "Dairy & Bakery",
+      "stock_quantity": 34,
+      "unit": "400 g",
+      "image_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+      "rating": 4.7,
+      "review_count": 67,
+      "is_pickup_eligible": 1,
+      "return_window_days": 3,
+      "created_at": "2026-08-02T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Fresh Farm Spinach (Palak)",
+      "description": "Hydroponically grown pesticide-free spinach. High iron and essential nutrient content.",
+      "price": 40,
+      "discount_price": 29,
+      "category_id": 1,
+      "category_name": "Fresh Produce",
+      "stock_quantity": 60,
+      "unit": "250 g",
+      "image_url": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80",
+      "rating": 4.6,
+      "review_count": 42,
+      "is_pickup_eligible": 1,
+      "return_window_days": 2,
+      "created_at": "2026-08-02T10:00:00.000Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 6,
+      "order_number": "ORD-54890",
+      "status": "Placed",
+      "created_at": "2026-08-22T16:58:30.310Z",
+      "updated_at": "2026-08-22T16:58:30.310Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_email": "customer@dmart.com",
+      "items": [
+        {
+          "id": 8,
+          "name": "Organic Cold Pressed Mustard Oil",
+          "price": 185,
+          "original_price": 210,
+          "quantity": 1,
+          "unit": "1 Litre",
+          "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "fulfillment_type": "HOME_DELIVERY",
+      "pickup_branch": null,
+      "scheduled_date": "2026-08-23",
+      "scheduled_slot": "10:00 AM - 12:00 PM",
+      "delivery_address": "Flat 402, Sunshine Heights, MG Road, Mumbai",
+      "subtotal": 185,
+      "tax": 9.25,
+      "delivery_fee": 40,
+      "pickup_discount": 0,
+      "total_amount": 234.25
+    },
+    {
+      "id": 5,
+      "order_number": "ORD-99133",
+      "status": "Completed",
+      "created_at": "2026-08-22T16:47:12.983Z",
+      "updated_at": "2026-08-22T16:48:03.940Z",
+      "user_id": 4,
+      "user_name": "omkar",
+      "user_email": "om@gmail.com",
+      "items": [
+        {
+          "id": 7,
+          "name": "Basmati Rice Premium Extra Long",
+          "price": 189,
+          "original_price": 220,
+          "quantity": 1,
+          "unit": "1 kg",
+          "image_url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": 8,
+          "name": "Organic Cold Pressed Mustard Oil",
+          "price": 185,
+          "original_price": 210,
+          "quantity": 1,
+          "unit": "1 Litre",
+          "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "fulfillment_type": "STORE_PICKUP",
+      "pickup_branch": "Mini D-Mart Hub (Powai Central Branch)",
+      "scheduled_date": "2026-08-23",
+      "scheduled_slot": "09:00 AM - 11:00 AM",
+      "delivery_address": null,
+      "subtotal": 374,
+      "tax": 18.7,
+      "delivery_fee": 0,
+      "pickup_discount": 20,
+      "total_amount": 335.7
+    },
+    {
+      "id": 4,
+      "order_number": "ORD-25221",
+      "status": "Preparing",
+      "created_at": "2026-08-22T16:29:21.518Z",
+      "updated_at": "2026-08-22T16:29:36.646Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_email": "customer@dmart.com",
+      "items": [
+        {
+          "id": 4,
+          "name": "Artisan Whole Wheat Bread",
+          "price": 48,
+          "original_price": 55,
+          "quantity": 1,
+          "unit": "400 g",
+          "image_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "fulfillment_type": "HOME_DELIVERY",
+      "pickup_branch": null,
+      "scheduled_date": "2026-08-23",
+      "scheduled_slot": "10:00 AM - 12:00 PM",
+      "delivery_address": "Flat 402, Sunshine Heights, MG Road, Mumbai",
+      "subtotal": 48,
+      "tax": 2.4,
+      "delivery_fee": 40,
+      "pickup_discount": 0,
+      "total_amount": 90.4
+    },
+    {
+      "id": 3,
+      "order_number": "ORD-11642",
+      "status": "Cancelled",
+      "created_at": "2026-08-22T16:06:03.900Z",
+      "updated_at": "2026-08-22T16:06:43.633Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_email": "customer@dmart.com",
+      "items": [
+        {
+          "id": 3,
+          "name": "Amul Taaza Toned Milk",
+          "price": 62,
+          "original_price": 64,
+          "quantity": 3,
+          "unit": "1 Litre",
+          "image_url": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": 4,
+          "name": "Artisan Whole Wheat Bread",
+          "price": 48,
+          "original_price": 55,
+          "quantity": 1,
+          "unit": "400 g",
+          "image_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "fulfillment_type": "HOME_DELIVERY",
+      "pickup_branch": null,
+      "scheduled_date": "2026-08-23",
+      "scheduled_slot": "10:00 AM - 12:00 PM",
+      "delivery_address": "Flat 402, Sunshine Heights, MG Road, Mumbai",
+      "subtotal": 234,
+      "tax": 11.7,
+      "delivery_fee": 40,
+      "pickup_discount": 0,
+      "total_amount": 285.7
+    },
+    {
+      "id": 1,
+      "order_number": "ORD-98214",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_email": "customer@dmart.com",
+      "items": [
+        {
+          "id": 1,
+          "name": "Organic Royal Gala Apples",
+          "price": 149,
+          "quantity": 2,
+          "image_url": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": 3,
+          "name": "Amul Taaza Toned Milk",
+          "price": 62,
+          "quantity": 3,
+          "image_url": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "fulfillment_type": "STORE_PICKUP",
+      "status": "Ready for Pickup",
+      "pickup_branch": "Mini D-Mart Express (Andheri East Branch)",
+      "scheduled_date": "2026-08-23",
+      "scheduled_slot": "10:00 AM - 12:00 PM",
+      "delivery_address": null,
+      "subtotal": 484,
+      "tax": 24.2,
+      "delivery_fee": 0,
+      "pickup_discount": 20,
+      "total_amount": 488.2,
+      "created_at": "2026-08-22T09:30:00.000Z",
+      "updated_at": "2026-08-22T10:15:00.000Z"
+    },
+    {
+      "id": 2,
+      "order_number": "ORD-98215",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_email": "customer@dmart.com",
+      "items": [
+        {
+          "id": 6,
+          "name": "Premium Roasted Almonds",
+          "price": 299,
+          "quantity": 1,
+          "image_url": "https://images.unsplash.com/photo-1508061252966-17727ab83e89?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "fulfillment_type": "HOME_DELIVERY",
+      "status": "Completed",
+      "pickup_branch": null,
+      "scheduled_date": "2026-08-21",
+      "scheduled_slot": "02:00 PM - 04:00 PM",
+      "delivery_address": "Flat 402, Sunshine Heights, MG Road, Mumbai",
+      "subtotal": 299,
+      "tax": 14.95,
+      "delivery_fee": 40,
+      "pickup_discount": 0,
+      "total_amount": 353.95,
+      "created_at": "2026-08-21T08:00:00.000Z",
+      "updated_at": "2026-08-21T15:00:00.000Z"
+    }
+  ],
+  "returns": [
+    {
+      "id": 3,
+      "return_number": "RET-7821",
+      "status": "Pending",
+      "manager_notes": null,
+      "created_at": "2026-08-22T16:48:50.435Z",
+      "updated_at": "2026-08-22T16:48:50.435Z",
+      "order_id": 2,
+      "order_number": "ORD-98215",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "item_name": "Premium Roasted Almonds",
+      "quantity": 1,
+      "reason": "Packaging Damaged / Broken Seal",
+      "type": "Refund",
+      "photo_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "return_number": "RET-9261",
+      "status": "Approved",
+      "manager_notes": null,
+      "created_at": "2026-08-22T16:07:06.591Z",
+      "updated_at": "2026-08-22T16:10:27.634Z",
+      "order_id": 2,
+      "order_number": "ORD-98215",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "item_name": "Premium Roasted Almonds",
+      "quantity": 1,
+      "reason": "Packaging Damaged / Broken Seal",
+      "type": "Refund",
+      "photo_url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80",
+      "notes": ""
+    },
+    {
+      "id": 1,
+      "return_number": "RET-4401",
+      "order_id": 2,
+      "order_number": "ORD-98215",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "item_name": "Premium Roasted Almonds",
+      "quantity": 1,
+      "reason": "Packaging Damaged / Broken Seal",
+      "type": "Refund",
+      "photo_url": "https://images.unsplash.com/photo-1508061252966-17727ab83e89?auto=format&fit=crop&w=600&q=80",
+      "notes": "Outer package seal was damaged when delivered.",
+      "status": "Pending",
+      "manager_notes": null,
+      "created_at": "2026-08-21T16:20:00.000Z",
+      "updated_at": "2026-08-21T16:20:00.000Z"
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": 61,
+      "created_at": "2026-08-22T17:51:00.696Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 60,
+      "created_at": "2026-08-22T17:50:29.953Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_REGISTERED",
+      "details": "New account registered as [CUSTOMER]: sai@gmail.com",
+      "ip_address": "::1"
+    },
+    {
+      "id": 59,
+      "created_at": "2026-08-22T17:49:56.518Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 58,
+      "created_at": "2026-08-22T17:04:29.163Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User admin@dmart.com logged in with role [ADMIN]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 57,
+      "created_at": "2026-08-22T17:04:22.609Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User staff@dmart.com logged in with role [STAFF]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 56,
+      "created_at": "2026-08-22T17:01:10.376Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 55,
+      "created_at": "2026-08-22T17:01:05.454Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "PRODUCT_DELETED",
+      "details": "Deleted product #6: Premium Roasted Almonds",
+      "ip_address": "::1"
+    },
+    {
+      "id": 54,
+      "created_at": "2026-08-22T17:00:40.039Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User admin@dmart.com logged in with role [ADMIN]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 53,
+      "created_at": "2026-08-22T17:00:21.279Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User staff@dmart.com logged in with role [STAFF]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 52,
+      "created_at": "2026-08-22T16:59:31.910Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User admin@dmart.com logged in with role [ADMIN]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 51,
+      "created_at": "2026-08-22T16:58:30.315Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_role": "CUSTOMER",
+      "action": "ORDER_CREATED",
+      "details": "Order ORD-54890 created (HOME_DELIVERY, Total: ₹234.25)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 50,
+      "created_at": "2026-08-22T16:50:42.997Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 49,
+      "created_at": "2026-08-22T16:50:07.360Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User admin@dmart.com logged in with role [ADMIN]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 48,
+      "created_at": "2026-08-22T16:49:00.316Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User staff@dmart.com logged in with role [STAFF]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 47,
+      "created_at": "2026-08-22T16:48:50.437Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_role": "CUSTOMER",
+      "action": "RETURN_REQUESTED",
+      "details": "Return request RET-7821 created for order #ORD-98215 (Refund: Premium Roasted Almonds)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 46,
+      "created_at": "2026-08-22T16:48:11.763Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 45,
+      "created_at": "2026-08-22T16:48:03.942Z",
+      "user_id": 2,
+      "user_name": "Priya Store Staff",
+      "user_role": "STAFF",
+      "action": "ORDER_STATUS_UPDATED",
+      "details": "Order #ORD-99133 status changed to 'Completed'",
+      "ip_address": "::1"
+    },
+    {
+      "id": 44,
+      "created_at": "2026-08-22T16:48:00.176Z",
+      "user_id": 2,
+      "user_name": "Priya Store Staff",
+      "user_role": "STAFF",
+      "action": "ORDER_STATUS_UPDATED",
+      "details": "Order #ORD-99133 status changed to 'Ready for Pickup'",
+      "ip_address": "::1"
+    },
+    {
+      "id": 43,
+      "created_at": "2026-08-22T16:47:58.014Z",
+      "user_id": 2,
+      "user_name": "Priya Store Staff",
+      "user_role": "STAFF",
+      "action": "ORDER_STATUS_UPDATED",
+      "details": "Order #ORD-99133 status changed to 'Preparing'",
+      "ip_address": "::1"
+    },
+    {
+      "id": 42,
+      "created_at": "2026-08-22T16:47:51.789Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User staff@dmart.com logged in with role [STAFF]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 41,
+      "created_at": "2026-08-22T16:47:12.986Z",
+      "user_id": 4,
+      "user_name": "omkar",
+      "user_role": "CUSTOMER",
+      "action": "ORDER_CREATED",
+      "details": "Order ORD-99133 created (STORE_PICKUP, Total: ₹335.7)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 40,
+      "created_at": "2026-08-22T16:39:25.801Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User om@gmail.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 39,
+      "created_at": "2026-08-22T16:29:52.019Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 38,
+      "created_at": "2026-08-22T16:29:43.567Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User admin@dmart.com logged in with role [ADMIN]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 37,
+      "created_at": "2026-08-22T16:29:36.649Z",
+      "user_id": 2,
+      "user_name": "Priya Store Staff",
+      "user_role": "STAFF",
+      "action": "ORDER_STATUS_UPDATED",
+      "details": "Order #ORD-25221 status changed to 'Preparing'",
+      "ip_address": "::1"
+    },
+    {
+      "id": 36,
+      "created_at": "2026-08-22T16:29:33.580Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User staff@dmart.com logged in with role [STAFF]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 35,
+      "created_at": "2026-08-22T16:29:21.520Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_role": "CUSTOMER",
+      "action": "ORDER_CREATED",
+      "details": "Order ORD-25221 created (HOME_DELIVERY, Total: ₹90.4)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 34,
+      "created_at": "2026-08-22T16:28:05.533Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 33,
+      "created_at": "2026-08-22T16:25:35.973Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User admin@dmart.com logged in with role [ADMIN]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 32,
+      "created_at": "2026-08-22T16:25:20.325Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_REGISTERED",
+      "details": "New account registered as [CUSTOMER]: om@gmail.com",
+      "ip_address": "::1"
+    },
+    {
+      "id": 31,
+      "created_at": "2026-08-22T16:20:18.955Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "LOGIN_FAILED",
+      "details": "Failed login attempt for non-existent email: omkar@gmail.com",
+      "ip_address": "::1"
+    },
+    {
+      "id": 30,
+      "created_at": "2026-08-22T16:20:17.051Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "LOGIN_FAILED",
+      "details": "Failed login attempt for non-existent email: omkar@gmail.com",
+      "ip_address": "::1"
+    },
+    {
+      "id": 29,
+      "created_at": "2026-08-22T16:14:28.848Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: ADMIN",
+      "ip_address": "::1"
+    },
+    {
+      "id": 28,
+      "created_at": "2026-08-22T16:14:25.862Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: STAFF",
+      "ip_address": "::1"
+    },
+    {
+      "id": 27,
+      "created_at": "2026-08-22T16:13:29.543Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: CUSTOMER",
+      "ip_address": "::1"
+    },
+    {
+      "id": 26,
+      "created_at": "2026-08-22T16:13:27.545Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "PRODUCT_DELETED",
+      "details": "Deleted product #3: Amul Taaza Toned Milk",
+      "ip_address": "::1"
+    },
+    {
+      "id": 25,
+      "created_at": "2026-08-22T16:13:06.352Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "PRODUCT_DELETED",
+      "details": "Deleted product #10: Apple",
+      "ip_address": "::1"
+    },
+    {
+      "id": 24,
+      "created_at": "2026-08-22T16:12:50.192Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "PRODUCT_CREATED",
+      "details": "Created new product: Apple (Stock: 50)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 23,
+      "created_at": "2026-08-22T16:12:32.427Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "PRODUCT_DELETED",
+      "details": "Deleted product #1: Organic Royal Gala Apples",
+      "ip_address": "::1"
+    },
+    {
+      "id": 22,
+      "created_at": "2026-08-22T16:12:15.821Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "USER_ROLE_CHANGED",
+      "details": "User customer@dmart.com role updated from [STAFF] to [CUSTOMER] by Admin",
+      "ip_address": "::1"
+    },
+    {
+      "id": 21,
+      "created_at": "2026-08-22T16:12:08.422Z",
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "USER_ROLE_CHANGED",
+      "details": "User customer@dmart.com role updated from [CUSTOMER] to [STAFF] by Admin",
+      "ip_address": "::1"
+    },
+    {
+      "id": 20,
+      "created_at": "2026-08-22T16:11:38.767Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: ADMIN",
+      "ip_address": "::1"
+    },
+    {
+      "id": 19,
+      "created_at": "2026-08-22T16:11:28.041Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: STAFF",
+      "ip_address": "::1"
+    },
+    {
+      "id": 18,
+      "created_at": "2026-08-22T16:10:47.004Z",
+      "user_id": 2,
+      "user_name": "Priya Store Staff",
+      "user_role": "STAFF",
+      "action": "PRODUCT_UPDATED",
+      "details": "Updated product #1: Organic Royal Gala Apples",
+      "ip_address": "::1"
+    },
+    {
+      "id": 17,
+      "created_at": "2026-08-22T16:10:27.635Z",
+      "user_id": 2,
+      "user_name": "Priya Store Staff",
+      "user_role": "STAFF",
+      "action": "RETURN_PROCESSED",
+      "details": "Return #RET-9261 was Approved by staff. Manager notes: 'N/A' (Restocked: true)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 16,
+      "created_at": "2026-08-22T16:08:55.288Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: STAFF",
+      "ip_address": "::1"
+    },
+    {
+      "id": 15,
+      "created_at": "2026-08-22T16:07:06.593Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_role": "CUSTOMER",
+      "action": "RETURN_REQUESTED",
+      "details": "Return request RET-9261 created for order #ORD-98215 (Refund: Premium Roasted Almonds)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 14,
+      "created_at": "2026-08-22T16:06:43.635Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_role": "CUSTOMER",
+      "action": "ORDER_CANCELLED",
+      "details": "Order #ORD-11642 was cancelled by user. Stock restored.",
+      "ip_address": "::1"
+    },
+    {
+      "id": 13,
+      "created_at": "2026-08-22T16:06:03.904Z",
+      "user_id": 1,
+      "user_name": "Rahul Customer",
+      "user_role": "CUSTOMER",
+      "action": "ORDER_CREATED",
+      "details": "Order ORD-11642 created (HOME_DELIVERY, Total: ₹285.7)",
+      "ip_address": "::1"
+    },
+    {
+      "id": 12,
+      "created_at": "2026-08-22T16:05:23.506Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "USER_LOGIN_SUCCESS",
+      "details": "User customer@dmart.com logged in with role [CUSTOMER]",
+      "ip_address": "::1"
+    },
+    {
+      "id": 11,
+      "created_at": "2026-08-22T16:05:06.789Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "LOGIN_FAILED",
+      "details": "Invalid password attempt for account: customer@dmart.com",
+      "ip_address": "::1"
+    },
+    {
+      "id": 10,
+      "created_at": "2026-08-22T16:04:30.361Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "LOGIN_FAILED",
+      "details": "Failed login attempt for non-existent email: om@gmail.com",
+      "ip_address": "::1"
+    },
+    {
+      "id": 9,
+      "created_at": "2026-08-22T16:02:29.686Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: CUSTOMER",
+      "ip_address": "::1"
+    },
+    {
+      "id": 8,
+      "created_at": "2026-08-22T16:01:31.870Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: CUSTOMER",
+      "ip_address": "::1"
+    },
+    {
+      "id": 7,
+      "created_at": "2026-08-22T15:59:17.726Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: CUSTOMER",
+      "ip_address": "::1"
+    },
+    {
+      "id": 6,
+      "created_at": "2026-08-22T15:58:34.854Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: STAFF",
+      "ip_address": "::1"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-08-22T15:58:24.962Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: CUSTOMER",
+      "ip_address": "::1"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-08-22T15:58:12.238Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: ADMIN",
+      "ip_address": "::1"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-22T15:57:56.590Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: STAFF",
+      "ip_address": "::1"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-22T15:57:50.516Z",
+      "user_id": null,
+      "user_name": "SYSTEM",
+      "user_role": "SYSTEM",
+      "action": "DEMO_ROLE_SWITCH",
+      "details": "Switched active demo session to role: CUSTOMER",
+      "ip_address": "::1"
+    },
+    {
+      "id": 1,
+      "user_id": 3,
+      "user_name": "Vikram Admin",
+      "user_role": "ADMIN",
+      "action": "SYSTEM_BOOT",
+      "details": "Mini D-Mart database store initialized with seed records.",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-08-01T10:00:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-white;
+  }
+}
+
+/* Glassmorphism Effects */
+.glass-panel {
+  @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80 shadow-xl;
+}
+
+.glass-card {
+  @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm border border-slate-200/60 dark:border-slate-800/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-emerald-500/30 dark:hover:border-emerald-500/30;
+}
+
+/* Custom Animated Gradients */
+.gradient-banner {
+  background: linear-gradient(135deg, #059669 0%, #10b981 50%, #0d9488 100%);
+}
+
+.gradient-dark-banner {
+  background: linear-gradient(135deg, #064e3b 0%, #022c22 50%, #042f2e 100%);
+}
+
+.badge-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600;
+}
