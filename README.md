@@ -4,7 +4,9 @@
 
 A full-fledged, production-ready **Mini D-Mart Grocery Store Application** built for the Round 2 Full-Stack Developer Practical Assessment.
 
-The application allows customers to browse grocery products, manage cart items, schedule **Store Pickup** or **Home Delivery**, track order lifecycles in real time, and submit **Return / Exchange requests**. Store Staff and Managers can manage fulfillment queues and return approvals, while Administrators possess full RBAC access, product catalog CRUD, and security audit log monitoring.
+- 🌐 **Live Application**: [https://mini-dmart-grocery-app-omkarfulari699-7052s-projects.vercel.app](https://mini-dmart-grocery-app-omkarfulari699-7052s-projects.vercel.app)
+- 📁 **GitHub Repository**: [https://github.com/Omkarfulari75/mini-dmart-grocery-app](https://github.com/Omkarfulari75/mini-dmart-grocery-app)
+- ⚡ **Vercel Dashboard**: [https://vercel.com/omkarfulari699-7052s-projects](https://vercel.com/omkarfulari699-7052s-projects)
 
 ---
 
@@ -17,6 +19,7 @@ The application allows customers to browse grocery products, manage cart items, 
   - **Home Delivery**: Delivery address input date & time slot scheduling with free delivery over ₹500.
   - **Store Pickup**: Pickup store branch selection date & time slot scheduling with an extra **₹20 Store Pickup Discount**!
   - **Promotional Coupons**: Supports promo code `DMART10` for an instant 10% discount.
+- **🤖 1-Click "Recipe-to-Cart" Express Bundles**: Automatically adds all required fresh ingredients for popular recipes (e.g. *Green Detox Smoothie*, *Artisan Breakfast Kit*, *Royal Basmati Meal*) to cart in 1 click.
 - **Order Lifecycle Tracking**: Visual step-by-step progress bar (`Placed` ➔ `Preparing` ➔ `Ready for Pickup` / `Out for Delivery` ➔ `Completed`).
 - **Stock Restoration Cancellation**: Customers can cancel orders while in `Placed` or `Preparing` state; cancelled items automatically return to inventory.
 - **Return & Exchange Request System**: Submit returns for completed orders within the 7-day return window with item pickers, return reason, proof photo URL, and refund vs. exchange preferences.
@@ -43,53 +46,25 @@ The application allows customers to browse grocery products, manage cart items, 
 
 ---
 
-## ⚡ Quick Start Guide
-
-### Prerequisites
-- Node.js (v18 or higher)
-- npm
-
-### Installation & Local Run
-
-1. **Clone or Navigate to Project Directory**:
-   ```bash
-   cd "Grocery store  application"
-   ```
-
-2. **Install All Dependencies**:
-   ```bash
-   npm run install:all
-   ```
-   *(Or run `npm install` inside both `server/` and `client/` directories)*.
-
-3. **Start Concurrent Development Servers**:
-   ```bash
-   npm run dev
-   ```
-   - **Frontend App**: [http://localhost:3000](http://localhost:3000)
-   - **Backend API**: [http://localhost:5000](http://localhost:5000)
-
----
-
 ## 🔑 Test Credentials & Role Demo Switcher
 
-The top navigation bar contains an **Assessment Role Switcher Demo** bar allowing evaluators to switch between user roles in 1 click without entering passwords!
+The top navigation bar contains a **Choose Sign In Role** selector allowing evaluators to sign in or switch roles in 1 click!
 
 | Role | Email | Password | Access Rights |
 | :--- | :--- | :--- | :--- |
 | **Customer** | `customer@dmart.com` | `Password123!` | Shop catalog, cart checkout, order tracking, return requests |
-| **Store Staff / Manager** | `staff@dmart.com` | `Password123!` | Store operations dashboard, order fulfillment queue, return approvals, stock edits |
-| **Admin** | `admin@dmart.com` | `Password123!` | System metrics, user RBAC management, product master CRUD, security audit logs |
+| **Store Staff / Manager** | `staff@dmart.com` | `Password123!` | Store operations dashboard (`/staff`), order fulfillment queue, return approvals, stock edits |
+| **Admin** | `admin@dmart.com` | `Password123!` | System metrics, user RBAC management (`/admin`), product master CRUD, security audit logs |
 
 ---
 
 ## 📡 API Architecture & Endpoints
 
 ### Authentication (`/api/auth`)
-- `POST /api/auth/register` - Create customer account
+- `POST /api/auth/register` - Create user account with explicit role selection (`CUSTOMER`, `STAFF`, `ADMIN`)
 - `POST /api/auth/login` - Authenticate & obtain JWT bearer token
 - `GET /api/auth/me` - Fetch active user profile
-- `POST /api/auth/demo-switch` - 1-click evaluator role switch
+- `POST /api/auth/demo-switch` - Evaluator role switch
 
 ### Products & Categories (`/api`)
 - `GET /api/categories` - List categories
