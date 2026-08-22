@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Store, User, Lock, Mail, Phone, ShieldCheck, UserCheck, AlertCircle } from 'lucide-react';
+import { Store, User, Lock, Mail, Phone, ShieldCheck, UserCheck, AlertCircle, ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const [isRegister, setIsRegister] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('customer@dmart.com');
+  const [password, setPassword] = useState('Password123!');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedRole, setSelectedRole] = useState('CUSTOMER'); // CUSTOMER | STAFF | ADMIN
+  const [selectedRole, setSelectedRole] = useState('CUSTOMER');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,21 +25,21 @@ export default function LoginPage() {
 
     if (modeParam === 'register') {
       setIsRegister(true);
+    } else if (modeParam === 'login') {
+      setIsRegister(false);
     }
 
     if (roleParam) {
       setSelectedRole(roleParam);
-      if (!isRegister) {
-        if (roleParam === 'STAFF') {
-          setEmail('staff@dmart.com');
-          setPassword('Password123!');
-        } else if (roleParam === 'ADMIN') {
-          setEmail('admin@dmart.com');
-          setPassword('Password123!');
-        } else {
-          setEmail('customer@dmart.com');
-          setPassword('Password123!');
-        }
+      if (roleParam === 'STAFF') {
+        setEmail('staff@dmart.com');
+        setPassword('Password123!');
+      } else if (roleParam === 'ADMIN') {
+        setEmail('admin@dmart.com');
+        setPassword('Password123!');
+      } else {
+        setEmail('customer@dmart.com');
+        setPassword('Password123!');
       }
     }
   }, [location.search]);
@@ -57,7 +57,6 @@ export default function LoginPage() {
           return;
         }
         const userData = await register(name, email, password, phone, selectedRole);
-        alert(`Account created successfully! Signed in as '${userData.role}' (${userData.email}).`);
         if (userData.role === 'ADMIN') navigate('/admin');
         else if (userData.role === 'STAFF') navigate('/staff');
         else navigate('/');
@@ -68,27 +67,26 @@ export default function LoginPage() {
         else navigate('/');
       }
     } catch (err) {
-      console.error(err);
-      const msg = err.response?.data?.message || (err.response?.data?.errors && err.response.data.errors[0]?.message) || 'Authentication failed. Check your details.';
+      console.error('Submit error:', err);
+      const msg = err.response?.data?.message || (err.response?.data?.errors && err.response.data.errors[0]?.message) || 'Authentication failed. Please check your credentials.';
       setError(msg);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleQuickPrefill = (role) => {
-    setSelectedRole(role);
-    setIsRegister(false);
+  const handleInstantRoleSignIn = async (role) => {
+    setLoading(true);
     setError(null);
-    if (role === 'STAFF') {
-      setEmail('staff@dmart.com');
-      setPassword('Password123!');
-    } else if (role === 'ADMIN') {
-      setEmail('admin@dmart.com');
-      setPassword('Password123!');
-    } else {
-      setEmail('customer@dmart.com');
-      setPassword('Password123!');
+    try {
+      const userData = await switchDemoRole(role);
+      if (userData.role === 'ADMIN') navigate('/admin');
+      else if (userData.role === 'STAFF') navigate('/staff');
+      else navigate('/');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -107,50 +105,41 @@ export default function LoginPage() {
           <p className="text-xs text-slate-500 font-medium">
             {isRegister 
               ? 'Select your role and create a new account below.' 
-              : 'Enter your email & password or choose prefilled demo credentials.'}
+              : 'Click any 1-click role button below or enter your email & password.'}
           </p>
         </div>
 
-        {/* Demo Quick Credentials Selector */}
+        {/* Demo 1-Click Role Direct Sign-In Selector */}
         {!isRegister && (
           <div className="bg-emerald-50 dark:bg-emerald-950/50 p-4 rounded-2xl border border-emerald-500/20 space-y-2.5">
             <div className="text-xs font-extrabold text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
-              <span>🔑 Quick Prefill Credentials:</span>
+              <span>⚡ Instant 1-Click Sign In:</span>
             </div>
 
             <div className="grid grid-cols-3 gap-1.5">
               <button
                 type="button"
-                onClick={() => handleQuickPrefill('CUSTOMER')}
-                className={`py-2 px-1 rounded-xl text-[11px] font-extrabold shadow-sm transition-all border ${
-                  email === 'customer@dmart.com'
-                    ? 'bg-emerald-600 text-white border-emerald-600'
-                    : 'bg-white dark:bg-slate-900 border-slate-300 text-slate-800 dark:text-white'
-                }`}
+                onClick={() => handleInstantRoleSignIn('CUSTOMER')}
+                disabled={loading}
+                className="py-2.5 px-1.5 rounded-xl text-[11px] font-black shadow-sm transition-all bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1 active:scale-95"
               >
                 🛒 Customer
               </button>
 
               <button
                 type="button"
-                onClick={() => handleQuickPrefill('STAFF')}
-                className={`py-2 px-1 rounded-xl text-[11px] font-extrabold shadow-sm transition-all border ${
-                  email === 'staff@dmart.com'
-                    ? 'bg-amber-500 text-white border-amber-500'
-                    : 'bg-white dark:bg-slate-900 border-slate-300 text-slate-800 dark:text-white'
-                }`}
+                onClick={() => handleInstantRoleSignIn('STAFF')}
+                disabled={loading}
+                className="py-2.5 px-1.5 rounded-xl text-[11px] font-black shadow-sm transition-all bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center gap-1 active:scale-95"
               >
-                📦 Store Staff
+                📦 Staff
               </button>
 
               <button
                 type="button"
-                onClick={() => handleQuickPrefill('ADMIN')}
-                className={`py-2 px-1 rounded-xl text-[11px] font-extrabold shadow-sm transition-all border ${
-                  email === 'admin@dmart.com'
-                    ? 'bg-purple-600 text-white border-purple-600'
-                    : 'bg-white dark:bg-slate-900 border-slate-300 text-slate-800 dark:text-white'
-                }`}
+                onClick={() => handleInstantRoleSignIn('ADMIN')}
+                disabled={loading}
+                className="py-2.5 px-1.5 rounded-xl text-[11px] font-black shadow-sm transition-all bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center gap-1 active:scale-95"
               >
                 🛡️ Admin
               </button>
@@ -167,7 +156,6 @@ export default function LoginPage() {
 
         {/* Main Form */}
         <form onSubmit={handleSubmit} className="space-y-4 text-xs font-medium">
-          {/* Role Selection Dropdown (For Registration) */}
           {isRegister && (
             <div>
               <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">
@@ -211,7 +199,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="omkar@gmail.com"
+                placeholder="customer@dmart.com"
                 className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-medium"
               />
             </div>
@@ -254,9 +242,9 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-md transition-all active:scale-[0.98] disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-md transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            {loading ? 'Processing...' : isRegister ? `Register as ${selectedRole} ➔` : 'Sign In ➔'}
+            {loading ? 'Authenticating...' : isRegister ? `Register as ${selectedRole} ➔` : 'Sign In ➔'}
           </button>
         </form>
 

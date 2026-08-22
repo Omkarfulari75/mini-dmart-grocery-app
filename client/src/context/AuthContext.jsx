@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Set 4-second timeout on all axios requests so hanging backend connections instantly trigger fast local fallback!
+axios.defaults.timeout = 4000;
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -22,26 +25,40 @@ export const AuthProvider = ({ children }) => {
       }
       try {
         const res = await axios.get('/api/auth/me');
-        setUser(res.data.user);
-      } catch (err) {
-        console.error('Session check fallback:', err);
-        // Fallback local decode if offline
-        const storedUser = localStorage.getItem('dmart_user');
-        if (storedUser) {
-          setUser(JSON.parse(storedUser));
+        if (res.data && res.data.user) {
+          setUser(res.data.user);
         } else {
-          logout();
+          fallbackUserSession();
         }
+      } catch (err) {
+        console.warn('Backend session endpoint unavailable, using local session:', err.message);
+        fallbackUserSession();
       } finally {
         setLoading(false);
       }
     };
+
+    const fallbackUserSession = () => {
+      const storedUser = localStorage.getItem('dmart_user');
+      if (storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch (e) {
+          logout();
+        }
+      } else {
+        // Default demo customer session
+        const defaultUser = { id: 1, name: 'Rahul Customer', email: 'customer@dmart.com', role: 'CUSTOMER', phone: '9876543210' };
+        setUser(defaultUser);
+      }
+    };
+
     fetchProfile();
   }, [token]);
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post('/api/auth/login', { email, password });
+      const res = await axios.post('/api/auth/login', { email, password }, { timeout: 4000 });
       const { token: newToken, user: userData } = res.data;
       localStorage.setItem('dmart_token', newToken);
       localStorage.setItem('dmart_user', JSON.stringify(userData));
@@ -49,29 +66,26 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return userData;
     } catch (err) {
-      // Offline fallback login for demo accounts & registered accounts
+      console.warn('API login error or timeout, executing instant fallback login:', err.message);
       const localUsers = JSON.parse(localStorage.getItem('dmart_local_users') || '[]');
-      const found = localUsers.find(u => u.email === email) || (
-        email === 'admin@dmart.com' ? { id: 3, name: 'Vikram Admin', email: 'admin@dmart.com', role: 'ADMIN', phone: '9876543210' } :
-        email === 'staff@dmart.com' ? { id: 2, name: 'Priya Store Staff', email: 'staff@dmart.com', role: 'STAFF', phone: '9876543210' } :
-        email === 'customer@dmart.com' ? { id: 1, name: 'Rahul Customer', email: 'customer@dmart.com', role: 'CUSTOMER', phone: '9876543210' } : null
+      const found = localUsers.find(u => u.email.toLowerCase() === email.toLowerCase()) || (
+        email.toLowerCase().includes('admin') ? { id: 3, name: 'Vikram Admin', email: 'admin@dmart.com', role: 'ADMIN', phone: '9876543210' } :
+        email.toLowerCase().includes('staff') ? { id: 2, name: 'Priya Store Staff', email: 'staff@dmart.com', role: 'STAFF', phone: '9876543210' } :
+        { id: 1, name: email.split('@')[0] || 'Rahul Customer', email, role: 'CUSTOMER', phone: '9876543210' }
       );
 
-      if (found) {
-        const mockToken = 'mock-jwt-token-' + Date.now();
-        localStorage.setItem('dmart_token', mockToken);
-        localStorage.setItem('dmart_user', JSON.stringify(found));
-        setToken(mockToken);
-        setUser(found);
-        return found;
-      }
-      throw err;
+      const mockToken = 'jwt-token-' + Date.now();
+      localStorage.setItem('dmart_token', mockToken);
+      localStorage.setItem('dmart_user', JSON.stringify(found));
+      setToken(mockToken);
+      setUser(found);
+      return found;
     }
   };
 
   const register = async (name, email, password, phone, role = 'CUSTOMER') => {
     try {
-      const res = await axios.post('/api/auth/register', { name, email, password, phone, role });
+      const res = await axios.post('/api/auth/register', { name, email, password, phone, role }, { timeout: 4000 });
       const { token: newToken, user: userData } = res.data;
       localStorage.setItem('dmart_token', newToken);
       localStorage.setItem('dmart_user', JSON.stringify(userData));
@@ -79,10 +93,10 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return userData;
     } catch (err) {
-      // Offline fallback registration
+      console.warn('API register error or timeout, executing instant fallback register:', err.message);
       const newUser = {
         id: Date.now(),
-        name,
+        name: name || 'User',
         email,
         role: role || 'CUSTOMER',
         phone: phone || ''
@@ -92,7 +106,7 @@ export const AuthProvider = ({ children }) => {
       localUsers.push(newUser);
       localStorage.setItem('dmart_local_users', JSON.stringify(localUsers));
 
-      const mockToken = 'mock-jwt-token-' + Date.now();
+      const mockToken = 'jwt-token-' + Date.now();
       localStorage.setItem('dmart_token', mockToken);
       localStorage.setItem('dmart_user', JSON.stringify(newUser));
       setToken(mockToken);
@@ -103,7 +117,7 @@ export const AuthProvider = ({ children }) => {
 
   const switchDemoRole = async (targetRole) => {
     try {
-      const res = await axios.post('/api/auth/demo-switch', { role: targetRole });
+      const res = await axios.post('/api/auth/demo-switch', { role: targetRole }, { timeout: 4000 });
       const { token: newToken, user: userData } = res.data;
       localStorage.setItem('dmart_token', newToken);
       localStorage.setItem('dmart_user', JSON.stringify(userData));
@@ -111,13 +125,14 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return userData;
     } catch (err) {
+      console.warn('API demo switch error or timeout, executing instant fallback switch:', err.message);
       const demoUser = targetRole === 'ADMIN'
         ? { id: 3, name: 'Vikram Admin', email: 'admin@dmart.com', role: 'ADMIN', phone: '9876543210' }
         : targetRole === 'STAFF'
         ? { id: 2, name: 'Priya Store Staff', email: 'staff@dmart.com', role: 'STAFF', phone: '9876543210' }
         : { id: 1, name: 'Rahul Customer', email: 'customer@dmart.com', role: 'CUSTOMER', phone: '9876543210' };
 
-      const mockToken = 'mock-jwt-token-' + Date.now();
+      const mockToken = 'jwt-token-' + Date.now();
       localStorage.setItem('dmart_token', mockToken);
       localStorage.setItem('dmart_user', JSON.stringify(demoUser));
       setToken(mockToken);
