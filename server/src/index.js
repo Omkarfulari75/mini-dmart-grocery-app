@@ -32,6 +32,15 @@ const authLimiter = rateLimit({
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/register', authLimiter);
 
+// Root Health check endpoint
+app.get('/', (req, res) => {
+  res.json({
+    status: 'UP',
+    service: 'Mini D-Mart Grocery API',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', productRoutes);
@@ -60,8 +69,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'An unexpected internal server error occurred.' });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`====================================================`);
-  console.log(`🛒 Mini D-Mart Server running on http://localhost:${PORT}`);
+  console.log(`🛒 Mini D-Mart Server running on port ${PORT}`);
   console.log(`====================================================`);
 });
