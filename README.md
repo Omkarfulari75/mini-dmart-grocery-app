@@ -4,7 +4,7 @@
 
 A full-fledged, production-ready **Mini D-Mart Grocery Store Application** built for the Round 2 Full-Stack Developer Practical Assessment.
 
-- 🌐 **Live Application**: [https://mini-dmart-grocery-app-omkarfulari699-7052s-projects.vercel.app](https://mini-dmart-grocery-app-omkarfulari699-7052s-projects.vercel.app)
+- 🌐 **Live Hosted Application**: [https://mini-dmart-grocery-app.vercel.app](https://mini-dmart-grocery-app.vercel.app)
 - 📁 **GitHub Repository**: [https://github.com/Omkarfulari75/mini-dmart-grocery-app](https://github.com/Omkarfulari75/mini-dmart-grocery-app)
 - ⚡ **Vercel Dashboard**: [https://vercel.com/omkarfulari699-7052s-projects](https://vercel.com/omkarfulari699-7052s-projects)
 
