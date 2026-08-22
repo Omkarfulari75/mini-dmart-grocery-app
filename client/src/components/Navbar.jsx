@@ -16,20 +16,15 @@ import {
 } from 'lucide-react';
 
 export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
-  const { user, logout, switchDemoRole } = useAuth();
+  const { user, logout } = useAuth();
   const { totalItemCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleRoleClick = async (role) => {
-    try {
-      const userData = await switchDemoRole(role);
-      if (userData.role === 'ADMIN') navigate('/admin');
-      else if (userData.role === 'STAFF') navigate('/staff');
-      else navigate('/');
-    } catch (err) {
-      navigate(`/login?role=${role}`);
-    }
+  const handleRoleClick = (role) => {
+    // Log out current session so the user goes to the Sign-In page to authenticate
+    logout();
+    navigate(`/login?role=${role}&mode=login`);
   };
 
   const getHomeLink = () => {
@@ -49,9 +44,9 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-medium">
             <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider border border-emerald-500/30 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-emerald-400" /> 1-Click Role Switcher
+              <Sparkles className="w-3 h-3 text-emerald-400" /> Choose Sign In Role:
             </span>
-            <span>Switch Role Session:</span>
+            <span>Select Role Credentials:</span>
           </div>
 
           <div className="flex items-center gap-1.5">
@@ -63,7 +58,7 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
                   : 'bg-white/10 hover:bg-white/20 text-slate-200'
               }`}
             >
-              🛒 Customer
+              🛒 Customer Login
             </button>
 
             <button
@@ -74,7 +69,7 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
                   : 'bg-white/10 hover:bg-white/20 text-slate-200'
               }`}
             >
-              📦 Store Staff
+              📦 Store Staff Login
             </button>
 
             <button
@@ -85,7 +80,7 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
                   : 'bg-white/10 hover:bg-white/20 text-slate-200'
               }`}
             >
-              🛡️ Admin
+              🛡️ Admin Login
             </button>
           </div>
         </div>
