@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { 
-  ShoppingBag, 
   ShoppingCart, 
-  User, 
   ShieldAlert, 
   ClipboardList, 
   Moon, 
   Sun, 
   LogOut, 
   Store, 
-  CheckCircle2, 
   Layers,
   Sparkles,
   LogIn
 } from 'lucide-react';
 
 export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
-  const { user, logout } = useAuth();
+  const { user, logout, switchDemoRole } = useAuth();
   const { totalItemCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleRoleClick = (role) => {
-    navigate(`/login?role=${role}`);
+  const handleRoleClick = async (role) => {
+    try {
+      const userData = await switchDemoRole(role);
+      if (userData.role === 'ADMIN') navigate('/admin');
+      else if (userData.role === 'STAFF') navigate('/staff');
+      else navigate('/');
+    } catch (err) {
+      navigate(`/login?role=${role}`);
+    }
   };
 
   const getHomeLink = () => {
@@ -45,43 +49,43 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-medium">
             <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider border border-emerald-500/30 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-emerald-400" /> Role Selector
+              <Sparkles className="w-3 h-3 text-emerald-400" /> 1-Click Role Switcher
             </span>
-            <span>Choose Sign In Role:</span>
+            <span>Switch Role Session:</span>
           </div>
 
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => handleRoleClick('CUSTOMER')}
-              className={`px-2.5 py-0.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-2.5 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 ${
                 user?.role === 'CUSTOMER'
                   ? 'bg-emerald-500 text-white shadow-sm ring-2 ring-emerald-400/50'
                   : 'bg-white/10 hover:bg-white/20 text-slate-200'
               }`}
             >
-              🛒 Customer Login
+              🛒 Customer
             </button>
 
             <button
               onClick={() => handleRoleClick('STAFF')}
-              className={`px-2.5 py-0.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-2.5 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 ${
                 user?.role === 'STAFF'
                   ? 'bg-amber-500 text-white shadow-sm ring-2 ring-amber-400/50'
                   : 'bg-white/10 hover:bg-white/20 text-slate-200'
               }`}
             >
-              📦 Store Staff Login
+              📦 Store Staff
             </button>
 
             <button
               onClick={() => handleRoleClick('ADMIN')}
-              className={`px-2.5 py-0.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-2.5 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 ${
                 user?.role === 'ADMIN'
                   ? 'bg-purple-600 text-white shadow-sm ring-2 ring-purple-400/50'
                   : 'bg-white/10 hover:bg-white/20 text-slate-200'
               }`}
             >
-              🛡️ Admin Login
+              🛡️ Admin
             </button>
           </div>
         </div>
@@ -105,7 +109,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
 
         {/* Center Nav Links - Filtered by User Role */}
         <nav className="hidden md:flex items-center gap-1 font-medium text-sm">
-          {/* Shop Grocery - Only for Customers or Guests */}
           {isCustomerOrGuest && (
             <Link
               to="/"
@@ -119,7 +122,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
             </Link>
           )}
 
-          {/* My Orders & Returns - Only for Logged-In Customers */}
           {user && user.role === 'CUSTOMER' && (
             <Link
               to="/orders"
@@ -133,7 +135,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
             </Link>
           )}
 
-          {/* Store Ops Dashboard - Only for Staff and Admin */}
           {isStaffOrAdmin && (
             <Link
               to="/staff"
@@ -147,7 +148,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
             </Link>
           )}
 
-          {/* Admin & Audit Logs - Only for Admin */}
           {isAdmin && (
             <Link
               to="/admin"
@@ -164,7 +164,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
 
         {/* Right Actions */}
         <div className="flex items-center gap-3">
-          {/* Dark / Light Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -173,7 +172,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
             {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-slate-600" />}
           </button>
 
-          {/* Cart Button - Only visible for Customers or Guests */}
           {isCustomerOrGuest && (
             <button
               onClick={onOpenCart}
@@ -189,7 +187,6 @@ export default function Navbar({ onOpenCart, darkMode, setDarkMode }) {
             </button>
           )}
 
-          {/* User Profile */}
           {user ? (
             <div className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-800">
               <div className="text-right hidden sm:block">
